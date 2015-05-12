@@ -12,10 +12,12 @@ function _createNewUser(user, callback) {
     console.log(user);
 
     var newUser = new User({
-
-        //Object here
-
-    });
+            userName: user.userName,
+            email: user.email,
+            pw: user.password,
+            activated: true
+        }
+    );
 
     newUser.save(function (err, user) {
         if (err) {

@@ -60,7 +60,7 @@ angular.module('myAppRename.controllers', []).
 
   .controller('MyCtrl2', function ($scope) {
     // write MyCtrl2 here
-  });
-
-
-
+  })
+    .controller('CreateUserCtrl', function ($scope) {
+      $scope.test = "WORKS!";
+    })

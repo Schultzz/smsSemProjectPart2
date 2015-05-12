@@ -53,8 +53,25 @@ var usersSchema = new mongoose.Schema({
   userName : String,
   email: {type: String, unique: true},
   pw: String,
-  created: { type: Date, default: new Date() }
+  created: { type: Date, default: new Date() },
+  activated : Boolean
 });
 
-mongoose.model( 'User', usersSchema,"testusers" );
+var airlinesSchema = new mongoose.Schema({
+
+    airline : String,
+    url : String
+
+});
+
+var activationSchema = new mongoose.Schema({
+
+    email : String,
+    activationCode : String
+
+})
+
+mongoose.model( 'User', usersSchema );
+mongoose.model( 'Airline', airlinesSchema);
+mongoose.model( 'Activation', activationSchema);
 

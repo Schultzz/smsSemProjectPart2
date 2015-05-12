@@ -8,6 +8,7 @@ var db = require("./model/db");
 var routes = require('./routes/index');
 var adminRest = require('./routes/REST_Admin_API');
 var userRest = require('./routes/REST_Users_API');
+var publicRest = require('./routes/REST_Public_API');
 
 var expressJwt = require('express-jwt');
 
@@ -35,6 +36,7 @@ app.use(express.static(path.join(__dirname, '../public')));
 app.use(express.static(path.join(__dirname, '../public/app')));
 
 app.use('/', routes);
+app.use('/publicApi', publicRest);
 app.use('/adminApi', adminRest);
 app.use('/userApi', userRest);
 

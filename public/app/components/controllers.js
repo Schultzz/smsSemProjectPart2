@@ -61,6 +61,18 @@ angular.module('myAppRename.controllers', []).
   .controller('MyCtrl2', function ($scope) {
     // write MyCtrl2 here
   })
-    .controller('CreateUserCtrl', function ($scope) {
+    .controller('CreateUserCtrl', function ($scope, $http) {
       $scope.test = "WORKS!";
+
+
+      // {"userName": a , "email": a, "pw eller password"}
+      $scope.makeUser = function () {
+        var url = "/publicApi";
+        console.log("userName: " + $scope.userNameForm);
+        console.log("email: " + $scope.emailForm);
+        console.log("password: " + $scope.passwordForm);
+
+        var payLoad = {"userName": $scope.usernameForm, "email": $scope.emailForm, "password": $scope.passwordForm};
+        $http.post(url, payLoad);
+      }
     })

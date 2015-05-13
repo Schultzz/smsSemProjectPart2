@@ -29,8 +29,8 @@ userFacade.findAllUsers(function (err, data) {
 //var Airline = mongoose.model("Airline");
 //
 //var newAirline = new Airline({
-//    airline: "Gruppe3",
-//    url: "http://semesterproject-testnikolai1.rhcloud.com/SemesterProjectFligths/"
+//    airline: "Gruppe1",
+//    url: "http://smsproject-schultz.rhcloud.com/smsSemProject/"
 //});
 //
 //newAirline.save(function (err, airline) {

@@ -31,8 +31,24 @@ function _createNewUser(user, callback) {
 
 }
 
+function _findAllUsers(callback) {
+
+    User.find({}, function (err, users) {
+
+        if (err) {
+            return res.end(JSON.stringify({error: err.toString()}))
+        }
+        ;
+
+        callback(null, users);
+
+    })
+
+}
+
 module.exports = {
 
-    createNewUser: _createNewUser
+    createNewUser: _createNewUser,
+    findAllUsers: _findAllUsers
 
 };

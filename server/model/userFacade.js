@@ -42,7 +42,7 @@ function _createNewUser(user, callback) {
                             //handlecode
                         }
                         else {
-                            _sendVerificationEmail(newActivation, newUser);
+                            //_sendVerificationEmail(newActivation, newUser);
                             callback(null, JSON.stringify(user));
                         }
                     })

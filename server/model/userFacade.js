@@ -3,29 +3,38 @@
  */
 var db = require('./db');
 var mongoose = require('mongoose');
+var bcrypt = require('bcryptjs');
 
 var User = mongoose.model('User');
 var Activation = mongoose.model('Activation');
 
+
 function _createNewUser(user, callback) {
 
-    console.log(user);
+    bcrypt.genSalt(10, function (err, salt) {
+        bcrypt.hash(user.password, salt, function (err, hash) {
 
-    var newUser = new User({
-            userName: user.userName,
-            email: user.email,
-            pw: user.password,
-            activated: true
-        }
-    );
+            console.log(user);
 
-    newUser.save(function (err, user) {
-        if (err) {
-            callback(JSON.stringify({error: err.toString()}), null);
-        }
-        else {
-            callback(null, JSON.stringify(user));
-        }
+            var newUser = new User({
+                    userName: user.userName,
+                    email: user.email,
+                    pw: hash,
+                    activated: true
+                }
+            );
+
+            newUser.save(function (err, user) {
+                if (err) {
+                    callback(JSON.stringify({error: err.toString()}), null);
+                }
+                else {
+                    callback(null, JSON.stringify(user));
+                }
+
+            })
+
+        })
 
     })
 

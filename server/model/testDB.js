@@ -30,7 +30,7 @@ userFacade.findAllUsers(function (err, data) {
 //
 //var newAirline = new Airline({
 //    airline: "Gruppe3",
-//    url: "http://semesterproject-testnikolai1.rhcloud.com/SemesterProjectFligths/api/flights"
+//    url: "http://semesterproject-testnikolai1.rhcloud.com/SemesterProjectFligths/"
 //});
 //
 //newAirline.save(function (err, airline) {
@@ -44,7 +44,7 @@ userFacade.findAllUsers(function (err, data) {
 //
 //var newAirline1 = new Airline({
 //    airline: "Gruppe7",
-//    url: "http://Airline7-team007.rhcloud.com/api/flight"
+//    url: "http://Airline7-team007.rhcloud.com/"
 //});
 //
 //newAirline1.save(function (err, airline) {

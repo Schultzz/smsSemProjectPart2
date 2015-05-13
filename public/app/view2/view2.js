@@ -24,4 +24,22 @@ angular.module('myAppRename.view2', ['ngRoute'])
         }
         $scope.error = data;
       });
+
+
+    $http({
+        method : 'GET',
+        url : 'userApi/flights/CPH/1483574400000'
+    })
+        .success(function(data, status, headers, comfig){
+            $scope.testFlights = data;
+            $scope.error = null;
+        }).
+        error(function (data, status, headers, config) {
+            if (status == 401) {
+                $scope.error = "You are not authenticated to request these data";
+                return;
+            }
+            $scope.error = data;
+        });
+
   }]);

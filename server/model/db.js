@@ -54,7 +54,8 @@ var usersSchema = new mongoose.Schema({
   email: {type: String, unique: true},
   pw: String,
   created: { type: Date, default: new Date() },
-  activated : Boolean
+  activated : Boolean,
+  role : String
 });
 
 var airlinesSchema = new mongoose.Schema({

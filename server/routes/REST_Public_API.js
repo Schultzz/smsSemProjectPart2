@@ -14,9 +14,13 @@ router.post('/', function(req, res){
 
 });
 
-router.post('/activation/:email/:activationCode', function(req, res){
+router.get('/activation/:email/:activationCode', function(req, res){
 
-
+    var email = req.params.email;
+    var activationCode = req.params.activationCode;
+    userFacade.activeUser(activationCode, email, function(result){
+        res.send(result);
+    });
 
 });
 

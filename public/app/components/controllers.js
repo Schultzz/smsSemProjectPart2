@@ -31,21 +31,24 @@ angular.module('myAppRename.controllers', []).
       $http
         .post('/authenticate', $scope.user)
         .success(function (data, status, headers, config) {
+
           $window.sessionStorage.token = data.token;
           $scope.isAuthenticated = true;
           var encodedProfile = data.token.split('.')[1];
           var profile = JSON.parse(url_base64_decode(encodedProfile));
-          $scope.username = profile.username;
+          $scope.username = profile.userName;
           $scope.isAdmin = profile.role == "admin";
           $scope.isUser = !$scope.isAdmin;
           $scope.error = null;
         })
+
         .error(function (data, status, headers, config) {
+
           // Erase the token if the user fails to log in
           delete $window.sessionStorage.token;
           $scope.isAuthenticated = false;
 
-          $scope.error = 'You failed to login. Invalid User or Password';
+          $scope.error = data;
         });
     };
 
@@ -72,7 +75,7 @@ angular.module('myAppRename.controllers', []).
         console.log("email: " + $scope.emailForm);
         console.log("password: " + $scope.passwordForm);
 
-        var payLoad = {"userName": $scope.usernameForm, "email": $scope.emailForm, "password": $scope.passwordForm};
+        var payLoad = {"userName": $scope.userNameForm, "email": $scope.emailForm, "password": $scope.passwordForm};
         $http.post(url, payLoad);
       }
     })

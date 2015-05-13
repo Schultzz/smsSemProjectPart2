@@ -21,7 +21,7 @@ function _createNewUser(user, callback) {
 
     newUser.save(function (err, user) {
         if (err) {
-            return res.end(JSON.stringify({error: err.toString()}));
+            callback(JSON.stringify({error: err.toString()}), null);
         }
         else {
             callback(null, JSON.stringify(user));

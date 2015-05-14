@@ -1,63 +1,76 @@
 'use strict';
 
-angular.module('myAppRename.view2', ['ngRoute','ui.bootstrap'])
+angular.module('myAppRename.view2', ['ngRoute', 'ui.bootstrap'])
 
-  .config(['$routeProvider', function ($routeProvider) {
-    $routeProvider.when('/view2', {
-      templateUrl: 'app/view2/view2.html',
-      controller: 'View2Ctrl'
-    });
-  }])
-  .controller('View2Ctrl', ['$scope', '$http', function ($scope, $http) {
+    .config(['$routeProvider', function ($routeProvider) {
+        $routeProvider.when('/view2', {
+            templateUrl: 'app/view2/view2.html',
+            controller: 'View2Ctrl'
+        });
+    }])
+    .controller('View2Ctrl', ['$scope', '$http', function ($scope, $http) {
 
         $scope.searchForm = false;
 
-    $http({
-      method: 'GET',
-      url: 'userApi/test'
-    })
-      .success(function (data, status, headers, config) {
-            $scope.searchForm = true;
-        $scope.info = data;
-        $scope.error = null;
-      }).
-      error(function (data, status, headers, config) {
-        if (status == 401) {
-          $scope.error = "You are not authenticated to request these data";
-          return;
+        $http({
+            method: 'GET',
+            url: 'userApi/test'
+        })
+            .success(function (data, status, headers, config) {
+                $scope.searchForm = true;
+                $scope.info = data;
+                $scope.error = null;
+            }).
+            error(function (data, status, headers, config) {
+                if (status == 401) {
+                    $scope.error = "You are not authenticated to request these data";
+                    return;
+                }
+                $scope.error = data;
+            });
+
+
+        $http({
+            method: 'GET',
+            url: 'userApi/flights/CPH/1483574400000'
+        })
+            .success(function (data, status, headers, comfig) {
+                $scope.testFlights = data;
+                $scope.error = null;
+            }).
+            error(function (data, status, headers, config) {
+                if (status == 401) {
+                    $scope.error = "You are not authenticated to request these data";
+                    return;
+                }
+                $scope.error = data;
+            });
+
+
+        $scope.test123 = function () {
+
+            console.log($scope.dt, $scope.searchAirport);
+
+
+
+            $scope.dt.setHours(0);
+            $scope.dt.setMinutes(0);
+            $scope.dt.setSeconds(0);
+
+            console.log($scope.searchAirport, ($scope.dt).getTime());
+
+            $http.get("http://localhost:3000/userApi/flights/" + $scope.searchAirport + "/" + new Date($scope.dt).getTime())
+                .success(function (data) {
+                    console.log("success", data[0]);
+                })
+                .error(function (err) {
+                    console.log("error", err);
+                });
+
         }
-        $scope.error = data;
-      });
 
 
-    $http({
-        method : 'GET',
-        url : 'userApi/flights/CPH/1483574400000'
-    })
-        .success(function(data, status, headers, comfig){
-            $scope.testFlights = data;
-            $scope.error = null;
-        }).
-        error(function (data, status, headers, config) {
-            if (status == 401) {
-                $scope.error = "You are not authenticated to request these data";
-                return;
-            }
-            $scope.error = data;
-        });
-
-
-
-        $scope.test123 = function(){
-
-            console.log($scope.dt);
-
-            console.log(new Date($scope.dt).getTime());
-
-        }
-
-
-        $scope.today = function() {
+        $scope.today = function () {
             $scope.dt = new Date();
         };
         $scope.today();
@@ -67,16 +80,16 @@ angular.module('myAppRename.view2', ['ngRoute','ui.bootstrap'])
         };
 
         // Disable weekend selection
-        $scope.disabled = function(date, mode) {
+        $scope.disabled = function (date, mode) {
             return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
         };
 
-        $scope.toggleMin = function() {
+        $scope.toggleMin = function () {
             $scope.minDate = $scope.minDate ? null : new Date();
         };
         $scope.toggleMin();
 
-        $scope.open = function($event) {
+        $scope.open = function ($event) {
             $event.preventDefault();
             $event.stopPropagation();
 
@@ -107,12 +120,12 @@ angular.module('myAppRename.view2', ['ngRoute','ui.bootstrap'])
                 }
             ];
 
-        $scope.getDayClass = function(date, mode) {
+        $scope.getDayClass = function (date, mode) {
             if (mode === 'day') {
-                var dayToCheck = new Date(date).setHours(0,0,0,0);
+                var dayToCheck = new Date(date).setHours(0, 0, 0, 0);
 
-                for (var i=0;i<$scope.events.length;i++){
-                    var currentDay = new Date($scope.events[i].date).setHours(0,0,0,0);
+                for (var i = 0; i < $scope.events.length; i++) {
+                    var currentDay = new Date($scope.events[i].date).setHours(0, 0, 0, 0);
 
                     if (dayToCheck === currentDay) {
                         return $scope.events[i].status;
@@ -123,4 +136,4 @@ angular.module('myAppRename.view2', ['ngRoute','ui.bootstrap'])
             return '';
         };
 
-  }]);
+    }]);

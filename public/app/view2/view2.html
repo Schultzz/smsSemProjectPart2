@@ -5,14 +5,16 @@
 <p style="color: #105cb6">
 
     {{info.msg}}
-    {{testFlights[0]}}
+    <!--{{testFlights[0]}}-->
 
-<form class="form-inline" ng-show="searchForm">
-    <h2>Search for flights: fromAirport/fromDate</h2>
-    <hr/>
-    <div class="form-group">
-        <input class="form-control" ng-model="searchAirport" type="text" placeholder="Airport">
-    </div>
+<div ng-show="searchForm">
+
+    <form class="form-inline">
+        <h2>Search for flights: fromAirport/fromDate</h2>
+        <hr/>
+        <div class="form-group">
+            <input class="form-control" ng-model="searchAirport" type="text" placeholder="Airport">
+        </div>
 
         <div class="input-group">
             <input type="date" class="form-control" datepicker-popup ng-model="dt" is-open="opened" min-date="minDate"
@@ -23,9 +25,40 @@
                         class="glyphicon glyphicon-calendar"></i></button>
               </span>
         </div>
-    <button class="btn btn-primary" ng-click="test123()"><span class="glyphicon glyphicon-search"></span> Search
-    </button>
-</form>
+        <button class="btn btn-primary" ng-click="test123()"><span class="glyphicon glyphicon-search"></span> Search
+        </button>
+    </form>
+
+    <table class="table table-striped" ng-hide="searchTable1">
+
+        <thead>
+        <th>Airline</th>
+        <th>Departure date</th>
+        <th>Arrival date</th>
+        <th>Departure Airport</th>
+        <th>Arrival Airport</th>
+        <th>Available seats</th>
+        <th>Price</th>
+        </thead>
+
+        <tbody>
+        <tr ng-repeat="airline in airlines">
+            <td>{{airline.airline}}</td>
+            <td>{{airline.takeOffDate | date}}</td>
+            <td>{{airline.landingDate | date}}</td>
+            <td>{{airline.depature}}</td>
+            <td>{{airline.destination}}</td>
+            <td>{{airline.availableSeats}}</td>
+            <td>{{airline.price}}</td>
+        </tr>
+
+        </tbody>
+
+
+    </table>
+
+
+</div>
 
 
 </p>

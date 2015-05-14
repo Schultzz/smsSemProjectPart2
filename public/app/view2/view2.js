@@ -52,7 +52,6 @@ angular.module('myAppRename.view2', ['ngRoute', 'ui.bootstrap'])
             console.log($scope.dt, $scope.searchAirport);
 
 
-
             $scope.dt.setHours(0);
             $scope.dt.setMinutes(0);
             $scope.dt.setSeconds(0);
@@ -61,7 +60,23 @@ angular.module('myAppRename.view2', ['ngRoute', 'ui.bootstrap'])
 
             $http.get("http://localhost:3000/userApi/flights/" + $scope.searchAirport + "/" + new Date($scope.dt).getTime())
                 .success(function (data) {
-                    console.log("success", data[0]);
+
+                    var arrAirlines = [];
+
+                    data.forEach(function (elem) {
+
+                        elem = JSON.parse(elem);
+
+                        if (elem instanceof Array) {
+                            elem.forEach(function(airlines){
+                                arrAirlines.push(airlines);
+                            });
+                        }
+                    });
+
+                    console.log(arrAirlines);
+
+                    $scope.airlines = arrAirlines;
                 })
                 .error(function (err) {
                     console.log("error", err);

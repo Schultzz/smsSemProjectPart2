@@ -40,6 +40,7 @@ angular.module('myAppRename.controllers', []).
                     $scope.isAdmin = profile.role == "admin";
                     $scope.isUser = !$scope.isAdmin;
                     $scope.error = null;
+                    $location.path("/view1");
                 })
 
                 .error(function (data, status, headers, config) {

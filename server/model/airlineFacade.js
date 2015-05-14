@@ -32,7 +32,6 @@ var getFlightsFromOtherAirlines = function (al, airport, date) {
         var urlObj = {url: elem.url + "/api/flights/" + airport + "/" + date};
 
         arrAirlinesUrls.push(request(urlObj));
-
     });
 
 
@@ -54,6 +53,7 @@ var getFlightsFromOtherAirlines = function (al, airport, date) {
 };
 
 var _getAirlines = function (airport, date, callback) {
+
     getAirlineUrls()
         .then(function (airlines) {
             return airlines;

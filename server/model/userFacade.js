@@ -15,7 +15,7 @@ function _createNewUser(user, callback) {
     bcrypt.genSalt(10, function (err, salt) {
         bcrypt.hash(user.password, salt, function (err, hash) {
 
-            console.log(user);
+            //console.log(user);
 
             var newUser = new User({
                     userName: user.userName,

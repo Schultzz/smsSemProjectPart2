@@ -11,7 +11,7 @@ router.get('/', function (req, res) {
 
 router.post('/authenticate', function (req, res) {
 
-    userFacade.validateUser(req.body.username, req.body.password, function (response) {
+    userFacade.validateUser(req.body.username, req.body.password, function (err, response) {
 
         if (response == null) {
             res.status(401).send('Wrong user or password');

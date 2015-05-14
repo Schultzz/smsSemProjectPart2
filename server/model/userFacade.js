@@ -22,7 +22,7 @@ function _createNewUser(user, callback) {
                     email: user.email,
                     pw: hash,
                     activated: false,
-                    role : user.role
+                    role: user.role
                 }
             );
 
@@ -42,7 +42,11 @@ function _createNewUser(user, callback) {
                             //handlecode
                         }
                         else {
-                            _sendVerificationEmail(newActivation, newUser);
+                            if (typeof global.DEACTIVATE_EMAIL_SYSTEM == "undefined") {
+                                console.log("in mail system");
+                                _sendVerificationEmail(newActivation, newUser);
+                            }
+
                             callback(null, JSON.stringify(user));
                         }
                     })
@@ -119,7 +123,7 @@ function _activateUser(activationCode, email, callback) {
                 User.update({email: email}, {
                     activated: true
                 }, function (err, numAffected, rawResponse) {
-                    if(numAffected.ok === numAffected.nModified && numAffected.ok === numAffected.n){
+                    if (numAffected.ok === numAffected.nModified && numAffected.ok === numAffected.n) {
                         callback({msg: "Your account is now activated"})
                     }
                     else {
@@ -127,7 +131,7 @@ function _activateUser(activationCode, email, callback) {
                     }
                 })
             }
-            else{
+            else {
                 callback({msg: "An error has occured"})
             }
         }
@@ -135,27 +139,29 @@ function _activateUser(activationCode, email, callback) {
 
 }
 
-function _validateLogin(username, password, callback){
+function _validateLogin(username, password, callback) {
 
-    User.findOne({userName : username},function(err ,result){
-        if(err){
+    User.findOne({userName: username}, function (err, result) {
+        if (err) {
             callback(JSON.stringify({error: err.toString()}), null);
         }
-        else{
+        else {
 
-            if(result){
-            bcrypt.compare(password, result.pw, function(err, res){
+            if (result) {
+                bcrypt.compare(password, result.pw, function (err, res) {
 
-                if(res){
-                    callback(result);
-                }
-                else{
-                    callback(null);
-                }
+                    if (res) {
+                        // This must have been a fault??
+                        //callback(result);
+                        callback(null, result);
+                    }
+                    else {
+                        callback(null);
+                    }
 
-            })
+                })
             }
-            else{
+            else {
                 callback(null);
             }
         }
@@ -168,7 +174,7 @@ module.exports = {
     createNewUser: _createNewUser,
     findAllUsers: _findAllUsers,
     activeUser: _activateUser,
-    validateUser : _validateLogin
+    validateUser: _validateLogin
 
 };
 

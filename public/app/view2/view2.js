@@ -8,9 +8,10 @@ angular.module('myAppRename.view2', ['ngRoute', 'ui.bootstrap'])
             controller: 'View2Ctrl'
         });
     }])
-    .controller('View2Ctrl', ['$scope', '$modal', '$http','$log' , function ($scope, $modal, $http, $log) {
+    .controller('View2Ctrl', ['$scope', '$modal', '$http', '$log', function ($scope, $modal, $http, $log) {
 
         $scope.searchForm = false;
+        $scope.noFlightAlert;
 
         $http({
             method: 'GET',
@@ -49,6 +50,10 @@ angular.module('myAppRename.view2', ['ngRoute', 'ui.bootstrap'])
 
         $scope.test123 = function () {
 
+            $scope.searchTable1 = false;
+            $scope.loader = true;
+
+
             console.log($scope.dt, $scope.searchAirport);
 
 
@@ -61,24 +66,34 @@ angular.module('myAppRename.view2', ['ngRoute', 'ui.bootstrap'])
             $http.get("http://localhost:3000/userApi/flights/" + $scope.searchAirport + "/" + new Date($scope.dt).getTime())
                 .success(function (data) {
 
-                    var arrAirlines = [];
+                        $scope.loader = false;
+                        $scope.searchTable1 = true;
 
-                    data.forEach(function (elem) {
+                        var arrAirlines = [];
 
-                        elem = JSON.parse(elem);
+                        data.forEach(function (elem) {
 
-                        if (elem instanceof Array) {
-                            elem.forEach(function (airlines) {
-                                arrAirlines.push(airlines);
-                            });
-                        }
-                    });
+                            elem = JSON.parse(elem);
 
-                    console.log(arrAirlines);
+                            if (elem instanceof Array) {
+                                elem.forEach(function (airlines) {
+                                    arrAirlines.push(airlines);
+                                });
+                            }
+                        });
 
-                    $scope.airlines = arrAirlines;
+                        console.log(arrAirlines);
+
+                        $scope.airlines = arrAirlines;
+
+
+
+
                 })
                 .error(function (err) {
+                    console.log(3);
+                    $scope.loader = false;
+                    $scope.noFlightAlert = true;
                     console.log("error", err);
                 });
 
@@ -157,7 +172,7 @@ angular.module('myAppRename.view2', ['ngRoute', 'ui.bootstrap'])
 
         $scope.animationsEnabled = true;
 
-        $scope.open = function (airline) {
+        $scope.openRes = function (airline) {
 
             console.log(airline)
 

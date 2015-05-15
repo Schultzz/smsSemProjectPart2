@@ -8,7 +8,7 @@ angular.module('myAppRename.view2', ['ngRoute', 'ui.bootstrap'])
             controller: 'View2Ctrl'
         });
     }])
-    .controller('View2Ctrl', ['$scope', '$http', function ($scope, $http) {
+    .controller('View2Ctrl', ['$scope', '$modal', '$http','$log' , function ($scope, $modal, $http, $log) {
 
         $scope.searchForm = false;
 
@@ -68,7 +68,7 @@ angular.module('myAppRename.view2', ['ngRoute', 'ui.bootstrap'])
                         elem = JSON.parse(elem);
 
                         if (elem instanceof Array) {
-                            elem.forEach(function(airlines){
+                            elem.forEach(function (airlines) {
                                 arrAirlines.push(airlines);
                             });
                         }
@@ -151,4 +151,56 @@ angular.module('myAppRename.view2', ['ngRoute', 'ui.bootstrap'])
             return '';
         };
 
-    }]);
+
+        //MODAL compenent
+
+
+        $scope.animationsEnabled = true;
+
+        $scope.open = function (airline) {
+
+            console.log(airline)
+
+            $scope.items = airline;
+            var size;
+
+            var modalInstance = $modal.open({
+                animation: $scope.animationsEnabled,
+                templateUrl: 'myModalContent.html',
+                controller: 'ModalInstanceCtrl',
+                size: size,
+                resolve: {
+                    items: function () {
+                        return $scope.items;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (selectedItem) {
+                $scope.selected = selectedItem;
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        };
+
+        $scope.toggleAnimation = function () {
+            $scope.animationsEnabled = !$scope.animationsEnabled;
+        };
+
+
+    }])
+    .controller('ModalInstanceCtrl', function ($scope, $modalInstance, items) {
+
+        $scope.items = items;
+        $scope.selected = {
+            item: $scope.items[0]
+        };
+
+        $scope.ok = function () {
+            $modalInstance.close($scope.selected.item);
+        };
+
+        $scope.cancel = function () {
+            $modalInstance.dismiss('cancel');
+        };
+    });

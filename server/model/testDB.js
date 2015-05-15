@@ -25,9 +25,9 @@ userFacade.findAllUsers(function (err, data) {
 
 //Add airlines.
 
-//var mongoose = require('mongoose');
-//var Airline = mongoose.model("Airline");
-//
+var mongoose = require('mongoose');
+var Airline = mongoose.model("Airline");
+
 //var newAirline = new Airline({
 //    airline: "Gruppe1",
 //    url: "http://smsproject-schultz.rhcloud.com/smsSemProject/"
@@ -39,6 +39,20 @@ userFacade.findAllUsers(function (err, data) {
 //    }
 //    else {
 //       console.log(airline);
+//    }
+//});
+//
+//var newAirline = new Airline({
+//    //airline: "Gruppe3",
+//    url: "http://semesterproject-testnikolai1.rhcloud.com/SemesterProjectFligths/"
+//});
+//
+//newAirline.save(function (err, airline) {
+//    if (err) {
+//        return res.end(JSON.stringify({error: err.toString()}));
+//    }
+//    else {
+//        console.log(airline);
 //    }
 //});
 

@@ -21,7 +21,10 @@ if( typeof global.TEST_DATABASE != "undefined" ) {
   dbURI = global.TEST_DATABASE;
 }
 else{
-  dbURI = 'mongodb://localhost/testdb';
+  //for openshift
+  //  dbURI = 'mongodb://schultz:qwerty@ds063168.mongolab.com:63168/ms';
+
+    dbURI = 'mongodb://localhost/testdb';
 }
 
 mongoose.connect(dbURI);

@@ -24,10 +24,10 @@ userFacade.findAllUsers(function (err, data) {
 
 
 //Add airlines.
-
-var mongoose = require('mongoose');
-var Airline = mongoose.model("Airline");
-
+//
+//var mongoose = require('mongoose');
+//var Airline = mongoose.model("Airline");
+//
 //var newAirline = new Airline({
 //    airline: "Gruppe1",
 //    url: "http://smsproject-schultz.rhcloud.com/smsSemProject/"
@@ -43,7 +43,7 @@ var Airline = mongoose.model("Airline");
 //});
 //
 //var newAirline = new Airline({
-//    //airline: "Gruppe3",
+//    airline: "Gruppe3",
 //    url: "http://semesterproject-testnikolai1.rhcloud.com/SemesterProjectFligths/"
 //});
 //
@@ -55,7 +55,7 @@ var Airline = mongoose.model("Airline");
 //        console.log(airline);
 //    }
 //});
-
+//
 //var newAirline1 = new Airline({
 //    airline: "Gruppe7",
 //    url: "http://Airline7-team007.rhcloud.com/"

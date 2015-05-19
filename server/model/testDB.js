@@ -72,22 +72,32 @@ var user = {
 
 
 var mongoose = require ('mongoose');
-var Order = mongoose.model("Order");
+var User = mongoose.model("User");
+//var Order = mongoose.model("Order");
+//
+//var order = new Order({
+//    email : "laks@gmail.com",
+//    flightId : "lakslaks123",
+//    airline : "Slyngel Airline",
+//    passengers : [{firstName : "Morten", lastName : "pis", city : "Soborg", country : "Faggidistan", street : "Shawarma 1"}, {firstName : "Stefan", lastName : "pis", city : "Soborg", country : "Faggidistan", street : "Shawarma 2"}],
+//    totalPrice : 1337
+//});
+//
+//order.save(function (err, order) {
+//
+//    if(err){
+//        return console.log(err);
+//    }
+//    else{
+//        console.log(order);
+//    }
+//});
 
-var order = new Order({
-    email : "laks@gmail.com",
-    flightId : "lakslaks123",
-    airline : "Slyngel Airline",
-    passengers : [{firstName : "Morten", lastName : "pis", city : "Soborg", country : "Faggidistan", street : "Shawarma 1"}, {firstName : "Stefan", lastName : "pis", city : "Soborg", country : "Faggidistan", street : "Shawarma 2"}],
-    totalPrice : 1337
-});
 
-order.save(function (err, order) {
 
-    if(err){
-        return console.log(err);
-    }
-    else{
-        console.log(order);
-    }
+// ORDER TEST
+
+User.findOne({email: "test@test.dk"}).populate('order').exec(function(err, data) {
+// Your callback code where you can access subdomain directly through custPhone.subdomain.name
+    console.log(data);
 })

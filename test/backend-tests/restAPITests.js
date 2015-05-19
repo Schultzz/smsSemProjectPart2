@@ -41,7 +41,9 @@ describe('REST_Admin_API /user', function () {
     after(function () {  //Stop server after the test
         //Uncomment the line below to completely remove the database, leaving the mongoose instance as before the tests
         mongoose.connection.db.dropDatabase();
-        testServer.close();
+        testServer.close(function(){
+            console.log("closing server");
+        });
     })
 
     it("Should get 2 users; Lars and Henrik", function (done) {
@@ -82,7 +84,9 @@ describe("REST_Users_API", function () {
     after(function () {  //Stop server after the test
         //Uncomment the line below to completely remove the database, leaving the mongoose instance as before the tests
         mongoose.connection.db.dropDatabase();
-        testServer.close();
+        testServer.close(function(){
+            console.log("closing server");
+        });
     })
 
 

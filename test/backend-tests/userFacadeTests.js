@@ -3,7 +3,6 @@ global.DEACTIVATE_EMAIL_SYSTEM = true;
 
 var db = require('../../server/model/db');
 var mongoose = require('mongoose');
-var nock = require('nock');
 var should = require('should');
 
 var userObject = require('./userObject');

@@ -52,17 +52,15 @@ process.on('SIGINT', function () {
 /** User SCHEMA **/
 /** Replace this Schema with your own(s) **/
 
-var Schema = mongoose.Schema,
-    ObjectId = Schema.ObjectId;
-
 var orderSchema = new mongoose.Schema({
 
     reservationID: String,
     flightID: String,
     passengers: [{firstName: String, lastName: String, city: String, country: String, street: String}],
     totalPrice: Number,
+    airline: {type : mongoose.Schema.Types.ObjectId, ref: 'Airline'},
+    user : {type : mongoose.Schema.Types.ObjectId, ref: 'User'}
 
-    airline: {type: String}
 });
 
 var usersSchema = new mongoose.Schema({
@@ -72,8 +70,7 @@ var usersSchema = new mongoose.Schema({
     pw: String,
     created: {type: Date, default: new Date()},
     activated: Boolean,
-    role: String,
-    order: {type: ObjectId, ref: 'orderSchema'}
+    role: String
 
 });
 

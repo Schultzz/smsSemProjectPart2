@@ -166,7 +166,7 @@ angular.module('myAppRename.controllers', []).
 
             console.log($scope.searchAirport, ($scope.dt).getTime());
 
-            $http.get("http://localhost:3000/userApi/flights/" + $scope.searchAirport + "/" + new Date($scope.dt).getTime())
+            $http.get("userApi/flights/" + $scope.searchAirport + "/" + new Date($scope.dt).getTime())
                 .success(function (data) {
 
                     $scope.loader = false;

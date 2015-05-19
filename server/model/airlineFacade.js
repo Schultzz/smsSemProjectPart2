@@ -71,13 +71,15 @@ var _getAirlines = function (airport, date, callback) {
         });
 };
 
-var _makeReservation = function (airline, id, reservation, email, callback) {
+var _makeReservation = function (airline, id, reservation, userId, callback) {
 
     Airline.findOne({airline: airline}, function (err, res) {
 
         if (err) {
             return console.log(err);
         }
+
+        console.log(res.url);
 
         var url = res.url + "api/flights/" + id;
 
@@ -101,24 +103,16 @@ var _makeReservation = function (airline, id, reservation, email, callback) {
                 flightID: body.flightID,
                 passengers: body.Passengers,
                 totalPrice: body.totalPrice,
-
-                airline: body.airline
+                airline: res._id,
+                user: userId
             });
 
-            newOrder.save();
-
-
-            User.update({email: email}, {
-                order: newOrder._id
-            }, function (err, numAffected, rawResponse) {
-                if (numAffected.ok === numAffected.nModified && numAffected.ok === numAffected.n) {
-                    console.log("order inserted");
+            newOrder.save(function (err, data) {
+                if (err) {
+                    console.log(err);
                 }
-                else {
-                    console.log("order failed");
-                }
+                console.log("data", data);
             });
-
 
         });
 
@@ -128,26 +122,26 @@ var _makeReservation = function (airline, id, reservation, email, callback) {
 
 };
 
-var passengerObj =
-{
-    "Passengers": [
-        {
-            "firstName": "Kong Hans123",
-            "lastName": "Hansen",
-            "city": "Lyngby",
-            "country": "Denmark",
-            "street": "Vejen"
-        }, {
-            "firstName": "Fisker123",
-            "lastName": "Hansen",
-            "city": "Lyngby",
-            "country": "Denmark",
-            "street": "Vejen"
-        }
-    ]
-};
-//
-//_makeReservation("Gruppe1", 6152, passengerObj, "test@test.dk");
+//var passengerObj =
+//{
+//    "Passengers": [
+//        {
+//            "firstName": "Kong Hans123",
+//            "lastName": "Hansen",
+//            "city": "Lyngby",
+//            "country": "Denmark",
+//            "street": "Vejen"
+//        }, {
+//            "firstName": "Fisker123",
+//            "lastName": "Hansen",
+//            "city": "Lyngby",
+//            "country": "Denmark",
+//            "street": "Vejen"
+//        }
+//    ]
+//};
+////
+//_makeReservation("Gruppe1", 6152, passengerObj, "5553ae2cd97cab94206b8288");
 
 module.exports = {
     getAirlines: _getAirlines,

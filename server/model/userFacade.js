@@ -76,7 +76,7 @@ function _sendVerificationEmail(activation, user) {
 // the same transporter object for all e-mails
 
 // setup e-mail data with unicode symbols
-    var url = 'http://localhost:3000/publicApi/activation/' + user.email + '/' + activation.activationCode
+    var url = 'publicApi/activation/' + user.email + '/' + activation.activationCode
     var mailOptions = {
         from: 'Grp1 <semprojectgrp1@gmail.com>', // sender address
         to: activation.email, // list of receivers

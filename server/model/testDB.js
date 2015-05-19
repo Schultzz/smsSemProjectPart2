@@ -7,7 +7,7 @@ var user = {
     userName: "Ole",
     email: "Ole@unicom.dk",
     pw: "Hans"
-}
+};
 
 //userFacade.createNewUser(user ,function (err, user) {
 //
@@ -72,8 +72,8 @@ var user = {
 
 
 var mongoose = require ('mongoose');
-var User = mongoose.model("User");
-//var Order = mongoose.model("Order");
+//var User = mongoose.model("User");
+var Order = mongoose.model("Order");
 //
 //var order = new Order({
 //    email : "laks@gmail.com",
@@ -97,7 +97,6 @@ var User = mongoose.model("User");
 
 // ORDER TEST
 
-User.findOne({email: "test@test.dk"}).populate('order').exec(function(err, data) {
-// Your callback code where you can access subdomain directly through custPhone.subdomain.name
+Order.findOne({reservationID: 6985}).populate('user').populate('airline').exec(function(err, data) {
     console.log(data);
-})
+});

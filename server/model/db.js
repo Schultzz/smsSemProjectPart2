@@ -1,5 +1,4 @@
 var mongoose = require( 'mongoose' );
-
 /*
 
 Note:
@@ -73,9 +72,20 @@ var activationSchema = new mongoose.Schema({
     email : String,
     activationCode : String
 
+});
+
+var orderSchema = new mongoose.Schema({
+
+    email : {type : String, ref : 'User'},
+    flightId : String,
+    airline : {type : String},
+    passengers : [{firstName : String, lastName : String, city : String, country : String, street : String}],
+    totalPrice : Number
+
 })
 
 mongoose.model( 'User', usersSchema );
 mongoose.model( 'Airline', airlinesSchema);
 mongoose.model( 'Activation', activationSchema);
+mongoose.model( 'Order', orderSchema);
 

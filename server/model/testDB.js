@@ -15,12 +15,12 @@ var user = {
 //
 //});
 
-
-userFacade.findAllUsers(function (err, data) {
-
-    console.log(data);
-
-});
+//
+//userFacade.findAllUsers(function (err, data) {
+//
+//    console.log(data);
+//
+//});
 
 
 //Add airlines.
@@ -69,3 +69,25 @@ userFacade.findAllUsers(function (err, data) {
 //        console.log(airline);
 //    }
 //});
+
+
+var mongoose = require ('mongoose');
+var Order = mongoose.model("Order");
+
+var order = new Order({
+    email : "laks@gmail.com",
+    flightId : "lakslaks123",
+    airline : "Slyngel Airline",
+    passengers : [{firstName : "Morten", lastName : "pis", city : "Soborg", country : "Faggidistan", street : "Shawarma 1"}, {firstName : "Stefan", lastName : "pis", city : "Soborg", country : "Faggidistan", street : "Shawarma 2"}],
+    totalPrice : 1337
+});
+
+order.save(function (err, order) {
+
+    if(err){
+        return console.log(err);
+    }
+    else{
+        console.log(order);
+    }
+})

@@ -109,18 +109,30 @@ var _makeReservation = function (airline, id, reservation, userId, callback) {
 
             newOrder.save(function (err, data) {
                 if (err) {
-                    console.log(err);
+                    return console.log(err);
                 }
                 console.log("data", data);
+                callback(data);
             });
 
         });
 
 
     });
-
-
+    
 };
+
+var _getReservation = function (reservationid, callback) {
+    Airline.findOne({airline : "MLG airlines", _id : reservationid}, function (err, res) {
+        if(err){
+            return console.log(err);
+        }
+
+
+    })
+
+    
+}
 
 //var passengerObj =
 //{

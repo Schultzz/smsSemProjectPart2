@@ -21,4 +21,17 @@ router.get('/flights/:startAirport/:date', function(req, res){
 
 });
 
+
+router.post('/flights/:airline/:flightid/:user', function (req, res){
+    var flightID = req.params.flightid;
+    var reservation = req.body;
+    var user = req.params.user;
+    var airline = req.params.airline;
+
+    airlineFacade.makeReservation(airline, flightID, reservation, user, function (data) {
+        res.send(data);
+    });
+
+})
+
 module.exports = router;

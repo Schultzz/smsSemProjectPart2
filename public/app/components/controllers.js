@@ -1,5 +1,5 @@
 angular.module('myAppRename.controllers', []).
-    controller('AppCtrl', function ($scope, $http, $window, $location) {
+    controller('AppCtrl', function ($scope, $http, $window, $location, UserFactory) {
 
         function url_base64_decode(str) {
             var output = str.replace('-', '+').replace('_', '/');
@@ -36,6 +36,7 @@ angular.module('myAppRename.controllers', []).
                     $scope.isAuthenticated = true;
                     var encodedProfile = data.token.split('.')[1];
                     var profile = JSON.parse(url_base64_decode(encodedProfile));
+                    UserFactory.setUser(profile);
                     $scope.username = profile.userName;
                     $scope.isAdmin = profile.role == "admin";
                     $scope.isUser = !$scope.isAdmin;
@@ -307,15 +308,43 @@ angular.module('myAppRename.controllers', []).
 
 
     }])
-    .controller('ModalInstanceCtrl', function ($scope, $modalInstance, items) {
-
+    .controller('ModalInstanceCtrl', function ($scope, $modalInstance, items, UserFactory, $http) {
+        $scope.passengers = [{firstName : "", lastName : "", city : "", country : "", street : ""}];
         $scope.items = items;
         $scope.selected = {
             item: $scope.items[0]
         };
 
+        $scope.newPassenger = function(){
+            $scope.passengers.push({firstName : "", lastName : "", city : "", country : "", street : ""});
+        };
+
+        $scope.removePassenger = function(passenger){
+            var index = $scope.passengers.indexOf(passenger);
+            if (index > -1) {
+                $scope.passengers.splice(index, 1);
+            }
+        };
+
         $scope.ok = function () {
-            $modalInstance.close($scope.selected.item);
+
+            var passengersJson = {"Passengers" : $scope.passengers}
+            var url = 'userApi/flights/' + items.airline + '/' + items.flightId + '/' + UserFactory.getUser()._id;
+            $http.post(url, passengersJson).
+                success(function(data, status, headers, config) {
+                   console.log(data);
+                }).
+                error(function(data, status, headers, config) {
+                    console.log("headers: " + headers);
+                    console.log("Data: " + data);
+                });
+
+
+            //console.log($scope.passengers);
+            //console.log($scope.items);
+            //console.log(UserFactory.getUser());
+
+
         };
 
         $scope.cancel = function () {

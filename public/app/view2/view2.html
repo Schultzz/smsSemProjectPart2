@@ -73,13 +73,28 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="input-group">
-                        <input type="number" class="form-control" placeholder="Reserve how many?">
-      <span class="input-group-btn">
-        <button class="btn btn-default" type="button" ng-click="">Reserve</button>
-      </span>
+
+
 
                     </div>
-                    <!-- /input-group -->
+                    <table class="table table-striped">
+                        <thead>
+                        <td>First name</td>
+                        <td>Last name</td>
+                        <td>City</td>
+                        <td>Country</td>
+                        <td>Street</td>
+                        </thead>
+                        <tr ng-repeat="pas in passengers">
+                            <td><input type="text" name="firstName" ng-model="pas.firstName"></td>
+                            <td><input type="text" name="lastName" ng-model="pas.lastName"></td>
+                            <td><input type="text" name="city" ng-model="pas.city"></td>
+                            <td><input type="text" name="country" ng-model="pas.country"></td>
+                            <td><input type="text" name="street" ng-model="pas.street"></td>
+                            <td><button ng-click="removePassenger(pas)">Remove</button></td>
+                        </tr>
+                    </table>
+                    <button ng-click="newPassenger()">Add passenger</button>
                 </div>
                 <h5>Available seats - {{items.availableSeats}}</h5>
             </div>
@@ -87,10 +102,11 @@
 
         </div>
         <div class="modal-footer">
-            <p>{{items.flightId}}</p>
-            <button class="btn btn-primary" ng-click="ok()">OK</button>
+            <button class="btn btn-primary" ng-click="ok()">Book</button>
             <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+
         </div>
+
     </script>
 
 </div>

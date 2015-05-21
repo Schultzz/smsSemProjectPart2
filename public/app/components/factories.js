@@ -11,7 +11,20 @@ angular.module('myAppRename.factories', []).
     return {
       getInfo: getInfo
     }
-  })
+  }).
+    factory('UserFactory', function(){
+        var user = {};
+        var setUser = function setUser(newUser){
+            user = newUser;
+        }
+        var getUser = function getUser(){
+            return user;
+        }
+        return {
+            setUser : setUser,
+            getUser : getUser
+        }
+    })
   .factory('authInterceptor', function ($rootScope, $q, $window) {
     return {
       request: function (config) {

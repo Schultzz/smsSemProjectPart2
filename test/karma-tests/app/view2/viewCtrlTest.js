@@ -48,7 +48,7 @@ describe('myAppRename.view2 view2Ctrl', function () {
     //    var jsonAirline = JSON.stringify(airlineResponse);
     //    httpBackendMock.expectGET("userApi/flights/CPH/1432126800841").
     //        respond(200,[{"test": "test"}]);
-    //    scope.test123();
+    //    scope.searchDateAirport();
     //    //scope.$digest();
     //
     //    httpBackendMock.flush();

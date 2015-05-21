@@ -6,6 +6,17 @@ describe("AppCtrl", function () {
 
     beforeEach(module('myAppRename.controllers'));
 
+    beforeEach(module({
+        UserFactory: {
+            setUser: function (){
+            },
+            getUser: function (){
+
+            }
+        }
+
+    }));
+
     beforeEach(inject(function ($controller, $rootScope, $httpBackend, $location) {
         location = $location;
         httpBackend = $httpBackend;

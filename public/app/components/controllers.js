@@ -62,18 +62,12 @@ angular.module('myAppRename.controllers', []).
             $location.path("/view1");
         }
     })
-
-    .controller('MyCtrl2', function ($scope) {
-        // write MyCtrl2 here
-    })
+    // ---------------------- CreateUser controller ----------------------
     .controller('CreateUserCtrl', function ($scope, $http, $timeout) {
-        $scope.test = "WORKS!";
 
         $scope.showError = false;
         $scope.doFade = false;
 
-
-        // {"userName": a , "email": a, "pw eller password"}
         $scope.makeUser = function () {
 
             $scope.showError = false;
@@ -82,9 +76,6 @@ angular.module('myAppRename.controllers', []).
             $scope.showError = true;
 
             var url = "/publicApi";
-            console.log("userName: " + $scope.userNameForm);
-            console.log("email: " + $scope.emailForm);
-            console.log("password: " + $scope.passwordForm);
 
             var payLoad = {
                 "userName": $scope.userNameForm,
@@ -112,60 +103,19 @@ angular.module('myAppRename.controllers', []).
             $scope.passwordForm = "";
         }
     })
+    // ---------------------- View2 controller ----------------------
     .controller('View2Ctrl', ['$scope', '$modal', '$http', '$log', function ($scope, $modal, $http, $log) {
 
-        $scope.searchForm = false;
-        $scope.noFlightAlert;
+        // -------------- Search function :startAirport / :startDate --------------
 
-        $http({
-            method: 'GET',
-            url: 'userApi/test'
-        })
-            .success(function (data, status, headers, config) {
-                $scope.searchForm = true;
-                $scope.info = data;
-                $scope.error = null;
-            }).
-            error(function (data, status, headers, config) {
-                if (status == 401) {
-                    $scope.error = "You are not authenticated to request these data";
-                    return;
-                }
-                $scope.error = data;
-            });
-
-
-        $http({
-            method: 'GET',
-            url: 'userApi/flights/CPH/1483574400000'
-        })
-            .success(function (data, status, headers, comfig) {
-                $scope.testFlights = data;
-                $scope.error = null;
-            }).
-            error(function (data, status, headers, config) {
-                if (status == 401) {
-                    $scope.error = "You are not authenticated to request these data";
-                    return;
-                }
-                $scope.error = data;
-            });
-
-
-        $scope.test123 = function () {
+        $scope.searchDateAirport = function () {
 
             $scope.searchTable1 = false;
             $scope.loader = true;
 
-
-            console.log($scope.dt, $scope.searchAirport);
-
-
             $scope.dt.setHours(0);
             $scope.dt.setMinutes(0);
             $scope.dt.setSeconds(0);
-
-            console.log($scope.searchAirport, ($scope.dt).getTime());
 
             $http.get("userApi/flights/" + $scope.searchAirport + "/" + new Date($scope.dt).getTime())
                 .success(function (data) {
@@ -176,33 +126,23 @@ angular.module('myAppRename.controllers', []).
                     var arrAirlines = [];
 
                     data.forEach(function (elem) {
-
                         elem = JSON.parse(elem);
-
                         if (elem instanceof Array) {
                             elem.forEach(function (airlines) {
                                 arrAirlines.push(airlines);
                             });
                         }
                     });
-
-                    console.log(arrAirlines);
-
                     $scope.airlines = arrAirlines;
-
-
-
-
                 })
                 .error(function (err) {
-                    console.log(3);
                     $scope.loader = false;
                     $scope.noFlightAlert = true;
                     console.log("error", err);
                 });
+        };
 
-        }
-
+        //-------------- Date picker to searchDateAirport function --------------
 
         $scope.today = function () {
             $scope.dt = new Date();
@@ -270,18 +210,14 @@ angular.module('myAppRename.controllers', []).
             return '';
         };
 
-
-        //MODAL compenent
-
+        //-------------- Modal to searchDateAirport table --------------
 
         $scope.animationsEnabled = true;
 
         $scope.openRes = function (airline) {
 
-            console.log(airline)
-
             $scope.items = airline;
-            var size;
+            var size = "lg";
 
             var modalInstance = $modal.open({
                 animation: $scope.animationsEnabled,
@@ -308,18 +244,19 @@ angular.module('myAppRename.controllers', []).
 
 
     }])
+    // ---------------------- ModalInstance controller ----------------------
     .controller('ModalInstanceCtrl', function ($scope, $modalInstance, items, UserFactory, $http) {
-        $scope.passengers = [{firstName : "", lastName : "", city : "", country : "", street : ""}];
+        $scope.passengers = [{firstName: "", lastName: "", city: "", country: "", street: ""}];
         $scope.items = items;
         $scope.selected = {
             item: $scope.items[0]
         };
 
-        $scope.newPassenger = function(){
-            $scope.passengers.push({firstName : "", lastName : "", city : "", country : "", street : ""});
+        $scope.newPassenger = function () {
+            $scope.passengers.push({firstName: "", lastName: "", city: "", country: "", street: ""});
         };
 
-        $scope.removePassenger = function(passenger){
+        $scope.removePassenger = function (passenger) {
             var index = $scope.passengers.indexOf(passenger);
             if (index > -1) {
                 $scope.passengers.splice(index, 1);
@@ -328,21 +265,16 @@ angular.module('myAppRename.controllers', []).
 
         $scope.ok = function () {
 
-            var passengersJson = {"Passengers" : $scope.passengers}
+            var passengersJson = {"Passengers": $scope.passengers};
             var url = 'userApi/flights/' + items.airline + '/' + items.flightId + '/' + UserFactory.getUser()._id;
             $http.post(url, passengersJson).
-                success(function(data, status, headers, config) {
-                   console.log(data);
+                success(function (data, status, headers, config) {
+                    console.log(data);
                 }).
-                error(function(data, status, headers, config) {
+                error(function (data, status, headers, config) {
                     console.log("headers: " + headers);
                     console.log("Data: " + data);
                 });
-
-
-            //console.log($scope.passengers);
-            //console.log($scope.items);
-            //console.log(UserFactory.getUser());
 
 
         };
@@ -350,4 +282,22 @@ angular.module('myAppRename.controllers', []).
         $scope.cancel = function () {
             $modalInstance.dismiss('cancel');
         };
+    }).
+
+    // ---------------------- Accordion controller ----------------------
+
+    controller('AccordionDemoCtrl', function ($scope, $http, UserFactory) {
+        $scope.oneAtATime = true;
+
+        var userId = UserFactory.getUser()._id;
+
+        $http.get('userApi/reservation/' + userId).
+            success(function (data) {
+                $scope.reservations = data;
+            }).
+            error(function (error) {
+                //should be in the scope.
+                console.log('error', error);
+            });
+
     });

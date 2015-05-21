@@ -119,44 +119,64 @@ var _makeReservation = function (airlineName, flightId, passengers, userId, call
 
 
     });
-    
+
 };
 
-var _getReservation = function (reservationid, callback) {
-    Airline.findOne({airline : "MLG airlines", _id : reservationid}, function (err, res) {
-        if(err){
-            return console.log(err);
+var _getReservation = function (userId, callback) {
+
+    Order.find({user: userId}).populate('user').populate('airline').exec(function (err, data) {
+        if (err) return callback(err);
+
+        var customerArray = [];
+
+        data.forEach(function (elem) {
+            var customerObject = {
+                userName: elem.user.userName,
+                reservationID: elem.reservationID,
+                flightID: elem.flightID,
+                airline: elem.airline.airline,
+                totalPrice: elem.totalPrice,
+                passengers: elem.passengers
+            };
+            customerArray.push(customerObject);
+        });
+
+        callback(null, customerArray);
+
+    });
+
+};
+
+//_getReservation("555ce82889ad053c20604c7c", function (err, data) {
+//    console.log(data);
+//});
+
+var passengerObj =
+{
+    "Passengers": [
+        {
+            "firstName": "Kong Hans123",
+            "lastName": "Hansen",
+            "city": "Lyngby",
+            "country": "Denmark",
+            "street": "Vejen"
+        }, {
+            "firstName": "Fisker123",
+            "lastName": "Hansen",
+            "city": "Lyngby",
+            "country": "Denmark",
+            "street": "Vejen"
         }
-
-
-    })
-
-    
+    ]
 };
 
-//var passengerObj =
-//{
-//    "Passengers": [
-//        {
-//            "firstName": "Kong Hans123",
-//            "lastName": "Hansen",
-//            "city": "Lyngby",
-//            "country": "Denmark",
-//            "street": "Vejen"
-//        }, {
-//            "firstName": "Fisker123",
-//            "lastName": "Hansen",
-//            "city": "Lyngby",
-//            "country": "Denmark",
-//            "street": "Vejen"
-//        }
-//    ]
-//};
-////
-//_makeReservation("MLG airlines", 6152, passengerObj, "5553ae2cd97cab94206b8288");
+//_makeReservation("MLG airlines", 6152, passengerObj, "555ce82889ad053c20604c7c",function (data){
+//
+//});
 
 module.exports = {
     getAirlines: _getAirlines,
-    makeReservation: _makeReservation
+    makeReservation: _makeReservation,
+    getReservation: _getReservation
 };
 

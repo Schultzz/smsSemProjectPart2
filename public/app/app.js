@@ -3,6 +3,7 @@
 // Declare app level module which depends on views, and components
 angular.module('myAppRename', [
     'ngRoute',
+    'ui.bootstrap',
     'myAppRename.controllers',
     'myAppRename.directives',
     'myAppRename.services',
@@ -10,9 +11,10 @@ angular.module('myAppRename', [
     'myAppRename.filters',
     'myAppRename.view1',
     'myAppRename.view2',
-    'myAppRename.view3'
+    'myAppRename.view3',
+    'myAppRename.reservation'
 ]).
-    config(['$routeProvider', function($routeProvider) {
+    config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/createUser', {
             templateUrl: 'app/createUser/createUser.html',
             controller: 'CreateUserCtrl'

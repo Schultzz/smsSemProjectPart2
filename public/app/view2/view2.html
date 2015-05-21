@@ -2,7 +2,7 @@
 
 <p style="color: #105cb6">
 
-<div ng-show="searchForm">
+<div>
 
     <form name="searFormVal" class="form-inline">
         <h2>Search for flights: fromAirport/fromDate</h2>
@@ -20,7 +20,7 @@
                         class="glyphicon glyphicon-calendar"></i></button>
               </span>
         </div>
-        <button ng-disabled="searFormVal.$invalid" class="btn btn-primary wow bounce" data-wow-delay="1s"  ng-click="test123()"><span class="glyphicon glyphicon-search"></span> Search
+        <button ng-disabled="searFormVal.$invalid" class="btn btn-primary wow bounce" data-wow-delay="1s"  ng-click="searchDateAirport()"><span class="glyphicon glyphicon-search"></span> Search
         </button>
     </form>
 

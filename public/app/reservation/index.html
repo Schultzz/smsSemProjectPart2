@@ -1,0 +1,20 @@
+<div>
+    <h3>Your reservations</h3>
+
+    <hr/>
+
+    <accordion close-others="oneAtATime">
+        <accordion-group heading="ReservationID {{res.reservationID}}" ng-repeat="res in reservations">
+            <h4>FlightID {{res.flightID}} with {{res.airline}}</h4>
+
+            <p>Passengers: </p>
+            <ul ng-repeat="pas in res.passengers">
+                <li>firstname: {{pas.firstName}}</li>
+                <li>firstname: {{pas.lastName}}</li>
+                <hr/>
+            </ul>
+
+            <h5>Price: {{res.totalPrice}}</h5>
+        </accordion-group>
+    </accordion>
+</div>

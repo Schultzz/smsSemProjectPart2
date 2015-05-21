@@ -71,9 +71,9 @@ var _getAirlines = function (airport, date, callback) {
         });
 };
 
-var _makeReservation = function (airline, id, reservation, userId, callback) {
+var _makeReservation = function (airlineName, flightId, passengers, userId, callback) {
 
-    Airline.findOne({airline: airline}, function (err, res) {
+    Airline.findOne({airline: airlineName}, function (err, res) {
 
         if (err) {
             return console.log(err);
@@ -81,11 +81,11 @@ var _makeReservation = function (airline, id, reservation, userId, callback) {
 
         console.log(res.url);
 
-        var url = res.url + "api/flights/" + id;
+        var url = res.url + "api/flights/" + flightId;
 
         var options = {
             method: 'post',
-            body: reservation,
+            body: passengers,
             json: true,
             url: url
         };
@@ -132,7 +132,7 @@ var _getReservation = function (reservationid, callback) {
     })
 
     
-}
+};
 
 //var passengerObj =
 //{
@@ -153,7 +153,7 @@ var _getReservation = function (reservationid, callback) {
 //    ]
 //};
 ////
-//_makeReservation("Gruppe1", 6152, passengerObj, "5553ae2cd97cab94206b8288");
+//_makeReservation("MLG airlines", 6152, passengerObj, "5553ae2cd97cab94206b8288");
 
 module.exports = {
     getAirlines: _getAirlines,

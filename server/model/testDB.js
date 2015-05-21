@@ -29,7 +29,7 @@ var user = {
 //var Airline = mongoose.model("Airline");
 //
 //var newAirline = new Airline({
-//    airline: "Gruppe1",
+//    airline: "MLG airlines",
 //    url: "http://smsproject-schultz.rhcloud.com/smsSemProject/"
 //});
 //
@@ -43,7 +43,7 @@ var user = {
 //});
 //
 //var newAirline = new Airline({
-//    airline: "Gruppe3",
+//    airline: "Ryanair",
 //    url: "http://semesterproject-testnikolai1.rhcloud.com/SemesterProjectFligths/"
 //});
 //
@@ -57,7 +57,7 @@ var user = {
 //});
 //
 //var newAirline1 = new Airline({
-//    airline: "Gruppe7",
+//    airline: "Air Berlin",
 //    url: "http://Airline7-team007.rhcloud.com/"
 //});
 //
@@ -74,29 +74,10 @@ var user = {
 var mongoose = require ('mongoose');
 //var User = mongoose.model("User");
 var Order = mongoose.model("Order");
-//
-//var order = new Order({
-//    email : "laks@gmail.com",
-//    flightId : "lakslaks123",
-//    airline : "Slyngel Airline",
-//    passengers : [{firstName : "Morten", lastName : "pis", city : "Soborg", country : "Faggidistan", street : "Shawarma 1"}, {firstName : "Stefan", lastName : "pis", city : "Soborg", country : "Faggidistan", street : "Shawarma 2"}],
-//    totalPrice : 1337
-//});
-//
-//order.save(function (err, order) {
-//
-//    if(err){
-//        return console.log(err);
-//    }
-//    else{
-//        console.log(order);
-//    }
-//});
-
 
 
 // ORDER TEST
 
-Order.findOne({reservationID: 6985}).populate('user').populate('airline').exec(function(err, data) {
+Order.findOne({reservationID: 7003}).populate('user').populate('airline').exec(function(err, data) {
     console.log(data);
 });

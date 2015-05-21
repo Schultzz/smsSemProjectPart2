@@ -1,7 +1,7 @@
 'use strict';
 
 describe('myAppRename.filters', function () {
-  beforeEach(module('myAppRename'));
+  beforeEach(module('myAppRename.filters'));
 
   describe('checkmark', function () {
 

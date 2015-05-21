@@ -28,6 +28,8 @@ router.post('/flights/:airline/:flightid/:user', function (req, res){
     var user = req.params.user;
     var airline = req.params.airline;
 
+    console.log(flightID, reservation, user, airline);
+
     airlineFacade.makeReservation(airline, flightID, reservation, user, function (data) {
         res.send(data);
     });

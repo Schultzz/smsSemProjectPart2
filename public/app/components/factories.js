@@ -7,7 +7,7 @@ angular.module('myAppRename.factories', []).
     var info = "Hello World from a Factory";
     var getInfo = function getInfo(){
       return info;
-    }
+    };
     return {
       getInfo: getInfo
     }
@@ -16,10 +16,10 @@ angular.module('myAppRename.factories', []).
         var user = {};
         var setUser = function setUser(newUser){
             user = newUser;
-        }
+        };
         var getUser = function getUser(){
             return user;
-        }
+        };
         return {
             setUser : setUser,
             getUser : getUser
@@ -44,4 +44,3 @@ angular.module('myAppRename.factories', []).
   });
 
 
-;

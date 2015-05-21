@@ -3,7 +3,7 @@ describe('myAppRename.view3 View3Ctrl', function() {
   var scope, httpBackendMock, ctrl;
   var users = [
     {userName : "Lars", email :"l@l.dk",pw: "test",created : new Date(2014,11,2)},
-    {userName : "Henrik", email :"h@h.dk",pw: "test",created : new Date(2014,11,2)},
+    {userName : "Henrik", email :"h@h.dk",pw: "test",created : new Date(2014,11,2)}
   ];
   beforeEach(module('myAppRename.view3'));
 

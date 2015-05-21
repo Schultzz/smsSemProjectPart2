@@ -86,8 +86,7 @@ angular.module('myAppRename.controllers', []).
             $http.post(url, payLoad)
                 .success(function (data, status, headers, config) {
                     //what the f? why doesnt it return a success or error?
-                    console.log(data);
-                    console.log("sucsd")
+                    $scope.postedUser = data;
                 })
                 .error(function (data, status, headers, config) {
                     console.log("ere")
@@ -266,7 +265,7 @@ angular.module('myAppRename.controllers', []).
         $scope.ok = function () {
 
             var passengersJson = {"Passengers": $scope.passengers};
-            var url = 'userApi/flights/' + items.airline + '/' + items.flightId + '/' + UserFactory.getUser()._id;
+            var url = 'userApi/reservation/' + items.airline + '/' + items.flightId + '/' + UserFactory.getUser()._id;
             $http.post(url, passengersJson).
                 success(function (data, status, headers, config) {
                     console.log(data);

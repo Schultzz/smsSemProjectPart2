@@ -5,7 +5,7 @@ var userFacade = require('../model/userFacade');
 
 /* GET home page. */
 router.get('/', function (req, res) {
-    res.redirect("app/index.html")
+    res.redirect("app/reservation.html")
 });
 
 
@@ -15,7 +15,7 @@ router.post('/authenticate', function (req, res) {
 
         if (response == null) {
             res.status(401).send('Wrong user or password');
-            return;
+
 
         }
         else {
@@ -24,11 +24,11 @@ router.post('/authenticate', function (req, res) {
                if(response.activated){
                var token = jwt.sign(response, require("../security/secrets").secretTokenUser, { expiresInMinutes: 60*5 });
                res.json({ token: token });
-               return;
+
                }
                else{
                    res.status(401).send('Please active your account by pressing the link send to your email');
-                   return;
+
                }
 
            }
@@ -36,11 +36,11 @@ router.post('/authenticate', function (req, res) {
 
                var token = jwt.sign(response, require("../security/secrets").secretTokenAdmin, { expiresInMinutes: 60*5 });
                res.json({ token: token });
-               return;
+
            }
             else{
                res.status(401).send('Wrong user or password');
-               return;
+
            }
         }
 

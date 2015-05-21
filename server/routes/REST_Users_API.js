@@ -1,6 +1,6 @@
 var express = require('express');
 
-var airlineFacade = require('../model/airlineFacade')
+var airlineFacade = require('../model/airlineFacade');
 
 var router = express.Router();
 router.get('/test', function (req, res) {

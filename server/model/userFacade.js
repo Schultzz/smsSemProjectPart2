@@ -29,7 +29,7 @@ function _createNewUser(user, callback) {
             var newActivation = new Activation({
                 email: newUser.email,
                 activationCode: new Array(15 + 1).join((Math.random().toString(36) + '00000000000000000').slice(2, 18)).slice(0, 15)
-            })
+            });
 
 
             newUser.save(function (err, user) {
@@ -76,7 +76,7 @@ function _sendVerificationEmail(activation, user) {
 // the same transporter object for all e-mails
 
 // setup e-mail data with unicode symbols
-    var url = 'publicApi/activation/' + user.email + '/' + activation.activationCode
+    var url = 'publicApi/activation/' + user.email + '/' + activation.activationCode;
     var mailOptions = {
         from: 'Grp1 <semprojectgrp1@gmail.com>', // sender address
         to: activation.email, // list of receivers
@@ -104,8 +104,6 @@ function _findAllUsers(callback) {
         if (err) {
             return res.end(JSON.stringify({error: err.toString()}))
         }
-        ;
-
         callback(null, users);
 
     })

@@ -4,4 +4,4 @@ module.exports =
         "email": "test@test.dk",
         "password": "test",
         "role": "user"
-    }
+    };

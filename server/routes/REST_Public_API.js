@@ -20,7 +20,7 @@ router.get('/activation/:email/:activationCode', function (req, res) {
     var activationCode = req.params.activationCode;
     userFacade.activeUser(activationCode, email, function (result) {
 
-        response = "&lt;div class=&quot;alert alert-success&quot;&gt; &lt;a href=&quot;#&quot; class=&quot;close&quot; data-dismiss=&quot;alert&quot;&gt;&amp;times;&lt;/a&gt; &lt;strong&gt;Success!&lt;/strong&gt; Your message has been sent successfully. &lt;/div&gt; "
+        response = "&lt;div class=&quot;alert alert-success&quot;&gt; &lt;a href=&quot;#&quot; class=&quot;close&quot; data-dismiss=&quot;alert&quot;&gt;&amp;times;&lt;/a&gt; &lt;strong&gt;Success!&lt;/strong&gt; Your message has been sent successfully. &lt;/div&gt; ";
 
         var strVar = "";
 

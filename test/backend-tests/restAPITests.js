@@ -23,7 +23,7 @@ describe('REST_Admin_API /user', function () {
             .on('error', function (err) {
                 console.log(err);
             });
-    })
+    });
 
     beforeEach(function (done) {
         User.remove({}, function () {
@@ -36,7 +36,7 @@ describe('REST_Admin_API /user', function () {
                 done();
             });
         });
-    })
+    });
 
     after(function () {  //Stop server after the test
         //Uncomment the line below to completely remove the database, leaving the mongoose instance as before the tests
@@ -44,7 +44,7 @@ describe('REST_Admin_API /user', function () {
         testServer.close(function(){
             console.log("closing server");
         });
-    })
+    });
 
     it("Should get 2 users; Lars and Henrik", function (done) {
         http.get("http://localhost:" + testPort + "/adminApi/user", function (res) {
@@ -87,7 +87,7 @@ describe("REST_Users_API", function () {
         testServer.close(function(){
             console.log("closing server");
         });
-    })
+    });
 
 
     it("Should return all flights from the userAPI", function (done) {

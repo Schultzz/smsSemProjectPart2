@@ -1,10 +1,10 @@
-describe("Testing routes", function(){
+describe("Testing routes", function () {
 
     var scope, location, route, httpBackend;
 
     beforeEach(module("myAppRename"));
 
-    beforeEach(inject(function($route, $location, $rootScope, $httpBackend) {
+    beforeEach(inject(function ($route, $location, $rootScope, $httpBackend) {
             httpBackend = $httpBackend;
             scope = $rootScope;
             location = $location;
@@ -22,6 +22,16 @@ describe("Testing routes", function(){
         expect(route.current.controller).toBe("CreateUserCtrl");
 
 
+    });
+
+    it("view2 route", function () {
+        httpBackend.expectGET('app/view2/view2.html').respond("");
+        expect(route.current).toBeUndefined();
+        location.path("/view2");
+        scope.$digest();
+
+        expect(route.current.templateUrl).toBe('app/view2/view2.html');
+        expect(route.current.controller).toBe("View2Ctrl");
     });
 
     it("should redirect to /task1 if an unknown path is given", function () {

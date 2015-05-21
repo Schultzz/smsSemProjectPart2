@@ -26,6 +26,3 @@ angular.module('myAppRename.view3', ['ngRoute'])
         $scope.error = data;
       });
 });
-
-
-

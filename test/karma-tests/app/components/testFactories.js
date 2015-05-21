@@ -14,7 +14,23 @@ describe('myAppRename.factories', function () {
     });
 
 
-    describe('XXXFactory', function () {
+    describe('UserFactory', function () {
+        var userFactory;
+
+        beforeEach(inject(function (_UserFactory_) {
+            userFactory = _UserFactory_;
+        }));
+
+        it("should work", function () {
+            var name = "Hans";
+
+            expect(userFactory.getUser()).toEqual({});
+
+            userFactory.setUser(name);
+
+            expect(userFactory.getUser()).toBe(name);
+        });
+
 
     });
 });

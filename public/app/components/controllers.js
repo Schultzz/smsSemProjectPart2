@@ -244,7 +244,7 @@ angular.module('myAppRename.controllers', []).
 
     }])
     // ---------------------- ModalInstance controller ----------------------
-    .controller('ModalInstanceCtrl', function ($scope, $modalInstance, items, UserFactory, $http) {
+    .controller('ModalInstanceCtrl', function ($scope, $modalInstance, items, UserFactory, $http, $location) {
         $scope.passengers = [{firstName: "", lastName: "", city: "", country: "", street: ""}];
         $scope.items = items;
         $scope.selected = {
@@ -269,6 +269,8 @@ angular.module('myAppRename.controllers', []).
             $http.post(url, passengersJson).
                 success(function (data, status, headers, config) {
                     console.log(data);
+                    $location.path('/reservations');
+                    $modalInstance.dismiss('succes');
                 }).
                 error(function (data, status, headers, config) {
                     console.log("headers: " + headers);
